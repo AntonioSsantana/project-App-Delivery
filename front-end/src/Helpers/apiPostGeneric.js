@@ -11,6 +11,7 @@ const apiPostGeneric = async (ENDPOINT, userData) => {
       body: JSON.stringify(userData),
     });
     const result = await fetchAPI.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.log(error);

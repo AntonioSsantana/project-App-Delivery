@@ -2,34 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../Components/navBar';
 import apiPostGeneric from '../Helpers/apiPostGeneric';
-import apiCallGeneric from '../Helpers/apiGeneric';
-import DetailCard from '../Components/DetailCard';
-import DetailBar from '../Components/DetailBar';
+import CustomerOrder from '../Components/CustomerOrder';
 
 export default function Order() {
   const [userName, setuserName] = useState('');
-  const [productDetail, setproductDetail] = useState([]);
+  const [ordersList, setOrdersList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [totalValueDetails, setTotalValueDetails] = useState(0);
 
   const history = useHistory();
+  const ENDPOINT = 'customer/orders';
 
   useEffect(() => {
-    const products = async () => {
-      const response = await apiCallGeneric('products');
-      const cart = JSON.parse(localStorage.getItem('cart'));
-      const cart2 = cart[0];
-      const arrDetails = [];
-      let totalValue = 0;
-      response.forEach((product, index) => {
-        if (cart2[index].quantity !== 0) {
-          totalValue += product.price * cart2[index].quantity;
-          arrDetails.push({ product, quantity: cart2[index].quantity });
-        }
-      });
-      setproductDetail(arrDetails);
+    const orders = async () => {
+      const { id } = JSON.parse(localStorage.getItem('user'));
+      console.log(`localStorage id:${id}`);
+      const response = await apiPostGeneric(ENDPOINT, id);
+      console.log(response);
+      setOrdersList(response);
       setIsLoading(false);
-      setTotalValueDetails(totalValue);
     };
 
     const validateUsers = async () => {
@@ -43,15 +33,29 @@ export default function Order() {
       }
     };
     validateUsers();
-    products();
+    orders();
   }, [history]);
 
   return (
     <div>
       <NavBar nome={ userName } />
       <p />
-      <DetailBar />
-      <p />
+      {/* {
+        isLoading
+          ? <h1>is loading..</h1>
+          : ordersList.map(({ id, status, saleDate, totalPrice }) => (
+            <CustomerOrder
+              key={ id }
+              id={ id }
+              status={ status }
+              data={ saleDate }
+              subtotal={ totalPrice }
+            />
+          ))
+      } */}
+
+      {/*  <DetailBar /> */}
+      {/* <p />
       {isLoading
         ? <h1>is loading..</h1>
         : productDetail.map((product, index) => (
@@ -67,13 +71,13 @@ export default function Order() {
             }
           />
         ))}
-      <p />
-      <div>
+      <p /> */}
+      {/* <div>
         Total: R$
         <span data-testid="customer_order_details__element-order-total-price">
           {totalValueDetails.toString().replace('.', ',')}
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }
