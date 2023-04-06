@@ -12,18 +12,15 @@ export default function Order() {
   const history = useHistory();
 
   useEffect(() => {
+    const { id, token, name } = JSON.parse(localStorage.getItem('user'));
     const orders = async () => {
-      const { id } = JSON.parse(localStorage.getItem('user'));
-      console.log(`localStorage id:${id}`);
       const response = await apiPostGeneric('customer/orders', { id });
-      console.log(response);
       setOrdersList(response);
       setIsLoading(false);
     };
 
     const validateUsers = async () => {
       if (JSON.parse(localStorage.getItem('user')) !== null) {
-        const { token, name } = JSON.parse(localStorage.getItem('user'));
         const response = await apiPostGeneric('validateUsers', { token });
         setuserName(name);
         if (!response) {
@@ -47,7 +44,7 @@ export default function Order() {
               key={ id }
               id={ id }
               status={ status }
-              data={ saleDate }
+              data={ saleDate.slice(0, '10') }
               subtotal={ totalPrice }
             />
           ))

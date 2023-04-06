@@ -28,7 +28,7 @@ export default function CustomerOrder({
       <p
         data-testid={ `customer_orders__element-order-date-${id}` }
       >
-        {data.slice(0, '10')}
+        {data}
 
       </p>
       <p
