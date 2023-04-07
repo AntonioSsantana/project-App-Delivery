@@ -1,10 +1,15 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import MyContext from '../Context/MyContext';
+import apiPOSTCheckout from '../Helpers/apiPOSTCheckout';
 
 function Table() {
   const DATA_TESTID = 'customer_checkout__element-order-table-';
+  const history = useHistory();
 
-  const { cart, setCart } = useContext(MyContext);
+  const { cart, setCart, totalPrice } = useContext(MyContext);
+  const [deliveryAddress, setDeliveryAdress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState(0);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart')) || [];
@@ -15,6 +20,21 @@ function Table() {
   const removeItem = (id) => {
     const item = cart.filter((i) => +i.id !== +id);
     setCart(item);
+  };
+
+  const finishOrder = async () => {
+    const token = JSON.parse(localStorage.getItem('user')).token || [];
+    console.log(token);
+    const finished = {
+      userId: 2,
+      sellerId: 2,
+      totalPrice: totalPrice.replace(',', '.'),
+      deliveryAddress,
+      deliveryNumber,
+      status: 'Pendente',
+    };
+    const { id } = await apiPOSTCheckout('sales', finished, token);
+    history.push(`/customer/orders/${id}`);
   };
 
   return (
@@ -83,7 +103,9 @@ function Table() {
             name="seller"
             data-testid="customer_checkout__select-seller"
           >
-            <option>Pessoa</option>
+            <option>Fulano</option>
+            <option>Ciclano</option>
+            <option>Beltrano</option>
           </select>
         </label>
         <span>Endereço</span>
@@ -91,18 +113,23 @@ function Table() {
           type="text"
           id="address"
           data-testid="customer_checkout__input-address"
+          value={ deliveryAddress }
+          onChange={ ({ target: { value } }) => setDeliveryAdress(value) }
         />
         <span>Número</span>
         <input
           type="text"
           id="number"
           data-testid="customer_checkout__input-address-number"
+          value={ deliveryNumber }
+          onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
         />
       </div>
       <div>
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ finishOrder }
         >
           FINALIZAR PEDIDO
         </button>
