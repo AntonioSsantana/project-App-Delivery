@@ -10,7 +10,21 @@ const createSale = async (saleData) => {
   return { sale };
 };
 
+const getSalesById = async (id) => {
+  const sales = await Sale.findAll({
+    attributes: [
+      'id',
+      'status',
+      'saleDate',
+      'totalPrice',
+    ],
+    where: { userId: id },
+  });
+  return sales;
+};
+
 module.exports = {
     getAllSales,
     createSale,
+    getSalesById,
   };

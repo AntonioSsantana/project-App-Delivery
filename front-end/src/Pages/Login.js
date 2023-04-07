@@ -28,13 +28,14 @@ export default function Login() {
 
   const enterApp = async () => {
     const response = await apiCallLogin({ email, password });
-    const { name, role, token } = response;
+    const { id, name, role, token } = response;
     if (!token) {
       setfailedlogin(true);
     }
     if (token) {
       localStorage.setItem('user', JSON.stringify(
         {
+          id,
           email: response.email,
           name,
           role,

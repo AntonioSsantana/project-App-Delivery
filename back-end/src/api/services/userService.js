@@ -24,13 +24,13 @@ const getByEmail = async (email) => {
 
 const getByEmailandPassword = async (reqEmail, password) => {
   const user = await User.findOne({ where: { email: reqEmail } });
-  const { name, email, role } = user.dataValues;
+  const { id, name, email, role } = user.dataValues;
   const validate = comparePassword(password, user.dataValues.password);
   if (!validate) {
     throw new Error('Invalid password');
   }
   const token = await generateToken(user.id);
-  return { token, name, email, role };
+  return { token, name, email, role, id };
 };
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
