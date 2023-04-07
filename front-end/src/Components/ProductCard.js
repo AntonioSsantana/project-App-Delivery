@@ -22,6 +22,7 @@ export default function ProductCard({
         src={ url }
         alt="img"
         data-testid={ `customer_products__img-card-bg-image-${id}` }
+        width="100px"
       />
       <div>
         <button

@@ -1,12 +1,12 @@
 const APIURL = 'http://localhost:3001/';
-
-const apiPostGeneric = async (ENDPOINT, userData) => {
+const apiPOSTCheckout = async (ENDPOINT, userData, token) => {
   try {
     console.log('userData:', userData);
     const fetchAPI = await fetch(`${APIURL}${ENDPOINT}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        authorization: token,
       },
       body: JSON.stringify(userData),
     });
@@ -17,4 +17,4 @@ const apiPostGeneric = async (ENDPOINT, userData) => {
   }
 };
 
-export default apiPostGeneric;
+export default apiPOSTCheckout;
