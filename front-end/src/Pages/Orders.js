@@ -43,8 +43,8 @@ export default function Order() {
             <CustomerOrder
               key={ id }
               id={ id }
-              status={ status.toUpperCase() }
-              date={ moment(saleDate).format('DD/MM/YY') }
+              status={ status }
+              date={ moment(saleDate).format('DD/MM/YYYY') }
               subtotal={ totalPrice.replace('.', ',') }
             />
           ))

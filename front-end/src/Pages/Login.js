@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import apiCallLogin from '../Helpers/loginApiCall';
+import apiPostGeneric from '../Helpers/apiPostGeneric';
 
 export default function Login() {
   const [enableButton, setButton] = useState(true);
@@ -8,6 +9,8 @@ export default function Login() {
   const [password, setpassword] = useState('');
   // const [isLoggied, setIsLoggied] = useState(false);
   const [failedLogin, setfailedlogin] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     const verifyEmail = '@';
@@ -22,9 +25,21 @@ export default function Login() {
     if (finalValidation) {
       setButton(false);
     }
-  }, [email, password]);
-
-  const history = useHistory();
+    const validateUsers = async () => {
+      if (JSON.parse(localStorage.getItem('user')) !== null) {
+        const { token } = JSON.parse(localStorage.getItem('user'));
+        const response = await apiPostGeneric('validateUsers', { token });
+        console.log(response);
+        if (response) {
+          history.push('/customer/products');
+        }
+        if (!response) {
+          history.push('/login');
+        }
+      }
+    };
+    validateUsers();
+  }, [email, password, history]);
 
   const enterApp = async () => {
     const response = await apiCallLogin({ email, password });

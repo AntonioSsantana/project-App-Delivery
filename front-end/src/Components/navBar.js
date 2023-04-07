@@ -5,11 +5,12 @@ export default function NavBar({ nome }) {
   const history = useHistory();
 
   const redirect = (event) => {
+    console.log(event.target.name);
     switch (event.target.name) {
     case 'products':
       history.push('/customer/products');
       break;
-    case 'pedidos':
+    case 'orders':
       history.push('/customer/orders');
       break;
     case 'logout':
@@ -40,7 +41,7 @@ export default function NavBar({ nome }) {
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
           onClick={ (e) => redirect(e) }
-          name="pedidos"
+          name="orders"
         >
           meus pedidos
         </button>
