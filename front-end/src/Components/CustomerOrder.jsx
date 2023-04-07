@@ -15,7 +15,6 @@ export default function CustomerOrder({
   return (
     <button
       type="button"
-      data-testid={ orderId }
       onClick={ () => history.push(`/customer/orders/${id}`) }
     >
       <label htmlFor="order">
