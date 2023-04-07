@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment/moment';
 import NavBar from '../Components/navBar';
 import apiPostGeneric from '../Helpers/apiPostGeneric';
 import CustomerOrder from '../Components/CustomerOrder';
@@ -35,7 +36,6 @@ export default function Order() {
   return (
     <div>
       <NavBar nome={ userName } />
-      <p />
       {
         isLoading
           ? <h1>is loading..</h1>
@@ -43,12 +43,15 @@ export default function Order() {
             <CustomerOrder
               key={ id }
               id={ id }
-              status={ status }
-              data={ saleDate.slice(0, '10') }
-              subtotal={ totalPrice }
+              status={ status.toUpperCase() }
+              date={ moment(saleDate).format('DD/MM/YY') }
+              subtotal={ totalPrice.replace('.', ',') }
             />
           ))
       }
+      { !isLoading && ordersList.length === 0
+        ? <h1>Você ainda não fez nenhum pedido :(</h1>
+        : null }
     </div>
   );
 }
