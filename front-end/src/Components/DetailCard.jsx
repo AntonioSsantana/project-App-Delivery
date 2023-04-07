@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 export default function DetailCard({
   index,
   nome,
-  unitValue,
   quantity,
+  unitValue,
   subtotal,
 }) {
   return (

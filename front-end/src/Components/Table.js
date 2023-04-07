@@ -15,7 +15,7 @@ function Table() {
     const items = JSON.parse(localStorage.getItem('cart')) || [];
 
     setCart(items);
-  }, []);
+  }, [setCart]);
 
   const removeItem = (id) => {
     const item = cart.filter((i) => +i.id !== +id);

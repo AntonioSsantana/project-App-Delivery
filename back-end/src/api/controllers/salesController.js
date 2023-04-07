@@ -1,6 +1,11 @@
 const { getCurrentDateTime } = require('../utils/currentTime');
 
-const { getAllSales, createSale, getSalesById } = require('../services/salesService');
+const {
+  getAllSales,
+  createSale,
+  getSalesByUserId,
+  getByOrderId,
+} = require('../services/salesService');
 const { createSaleProduct } = require('../services/productSaleService');
 
 const mocksaleproduct = [
@@ -16,9 +21,15 @@ const mocksaleproduct = [
 
 ];
 
-const getAllById = async (req, res) => {
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const response = await getByOrderId(id);
+  res.status(200).json(response);
+};
+
+const getAllByUserId = async (req, res) => {
   const { id } = req.body;
-  const response = await getSalesById(id);
+  const response = await getSalesByUserId(id);
   res.status(200).json(response);
 };
 const getAllsales = async (req, res) => {
@@ -52,5 +63,6 @@ const getAllsales = async (req, res) => {
   module.exports = {
     getAllsales,
     createSaleHandler,
-    getAllById,
+    getAllByUserId,
+    getById,
   };

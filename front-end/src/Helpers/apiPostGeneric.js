@@ -2,7 +2,6 @@ const APIURL = 'http://localhost:3001/';
 
 const apiPostGeneric = async (ENDPOINT, userData) => {
   try {
-    console.log('userData:', userData);
     const fetchAPI = await fetch(`${APIURL}${ENDPOINT}`, {
       method: 'POST',
       headers: {
@@ -11,7 +10,6 @@ const apiPostGeneric = async (ENDPOINT, userData) => {
       body: JSON.stringify(userData),
     });
     const result = await fetchAPI.json();
-    console.log(result);
     return result;
   } catch (error) {
     console.log(error);
