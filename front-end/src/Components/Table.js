@@ -26,7 +26,7 @@ function Table() {
     const token = JSON.parse(localStorage.getItem('user')).token || [];
     console.log(token);
     const finished = {
-      userId: 2,
+      userId: 3,
       sellerId: 2,
       totalPrice: totalPrice.replace(',', '.'),
       deliveryAddress,
