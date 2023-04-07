@@ -107,9 +107,9 @@ export default function Products() {
         price -= objectQty.quantity * productsArr[index].price;
       }
     });
-
+    Math.abs(price);
     // *****
-    const finalPrice = price.toFixed(2).toString().replace('.', ',').replace('-', '');
+    const finalPrice = price.toFixed(2).replace('.', ',');
     setcheckoutValue(finalPrice);
   };
 
@@ -125,7 +125,8 @@ export default function Products() {
     // Carrinho
     let price = 0;
     newState.forEach((objectQty, index) => {
-      price += +objectQty.quantity * +productsArr[index].price;
+      console.log(objectQty.quantity);
+      price += +(objectQty.quantity || 0) * +productsArr[index].price;
     });
     const finalPrice = price.toFixed(2).toString().replace('.', ',');
     setcheckoutValue(finalPrice);
