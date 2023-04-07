@@ -44,7 +44,7 @@ const getAllsales = async (req, res) => {
           quantity: product.quantity,
         }));
        await createSaleProduct(newArr);
-       return res.status(201).json(sale.id);
+       return res.status(201).json({ id: sale.id });
     } catch (error) {
      return res.status(400).json({ error: error.message }); 
 }

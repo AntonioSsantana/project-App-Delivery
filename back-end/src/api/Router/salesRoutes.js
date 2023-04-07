@@ -6,8 +6,8 @@ const { getAllsales,
 
 const salesRouter = express.Router();
 
-salesRouter.get('/sales', getAllsales)
-.post('/sales', createSaleHandler);
-
 salesRouter.post('/customer/orders', getAllById);
+salesRouter.get('/sales', getAllsales);
+salesRouter.post('/sales', createSaleHandler);
+
 module.exports = salesRouter;

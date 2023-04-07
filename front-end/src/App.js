@@ -22,7 +22,6 @@ function App() {
           <Route exact path="/customer/checkout" component={ Checkout } />
           <Route exact path="/admin/manage" component={ Admin } />
           <Route exact path="/customer/orders" component={ Orders } />
-          {/* <Route exact path="/customer/checkout" component={ Checkout } /> */}
         </Switch>
       </Provider>
     </main>
