@@ -31,7 +31,6 @@ export default function DetailBar({
       <button type="button" data-testid={ buttonId }>
         marcar como entregue
       </button>
-
     </div>
   );
 }

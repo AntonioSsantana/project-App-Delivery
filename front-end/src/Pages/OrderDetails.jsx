@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import moment from 'moment/moment';
 import NavBar from '../Components/navBar';
 import apiPostGeneric from '../Helpers/apiPostGeneric';
 import apiCallGeneric from '../Helpers/apiGeneric';
-/* import DetailCard from '../Components/DetailCard'; */
-import DetailBar from '../Components/DetailBar';
+import ProductDetail from '../Components/ProductDetail';
 
 export default function OrderDetails({ match: { params: { id } } }) {
   const [userName, setuserName] = useState('');
@@ -14,6 +12,7 @@ export default function OrderDetails({ match: { params: { id } } }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const history = useHistory();
+
   useEffect(() => {
     const { token, name } = JSON.parse(localStorage.getItem('user'));
     const orderDetails = async () => {
@@ -40,22 +39,7 @@ export default function OrderDetails({ match: { params: { id } } }) {
       <NavBar nome={ userName } />
       <main>
         <h1>Detalhe do Pedido</h1>
-        { isLoading
-          ? <h1>Carregando</h1>
-          : (
-            <section>
-              <DetailBar
-                id={ order.id }
-                seller={ order.sellerId }
-                date={ moment(order.saleDate).format('DD/MM/YYYY') }
-                status={ order.status }
-              />
-              <p data-testid="customer_order_details__element-order-total-price">
-                Total: R$
-                {order.totalPrice.replace('.', ',')}
-              </p>
-            </section>
-          )}
+        { isLoading ? <h1>Carregando...</h1> : <ProductDetail order={ order } /> }
       </main>
     </div>
   );

@@ -7,44 +7,29 @@ export default function DetailCard({
   unitValue,
   subtotal,
 }) {
+  const element = 'customer_order_details__element-';
+  const indexId = `${element}order-table-item-number-${index}`;
+  const nameId = `${element}order-table-name-${index}`;
+  const quantityId = `${element}order-table-quantity-${index}`;
+  const unitValueId = `${element}order-table-sub-total-${index}`;
+  const subtotalId = `${element}order-total-price-${index}`;
   return (
-    <div
-      className="productCard"
-    >
-      <span
-        data-testid={ `customer_order_details__element-order-table-item-number-${index}` }
-      >
+    <div className="productCard">
+      <p data-testid={ indexId }>
         {index}
-
-      </span>
-      {' '}
-      <span
-        data-testid={ `customer_order_details__element-order-table-name-${index}` }
-      >
+      </p>
+      <p data-testid={ nameId }>
         {nome}
-
-      </span>
-      {' '}
-      <span
-        data-testid={ `customer_order_details__element-order-table-quantity-${index}` }
-      >
+      </p>
+      <p data-testid={ quantityId }>
         {quantity}
-
-      </span>
-      {' '}
-      <span
-        data-testid={ `customer_order_details__element-order-table-sub-total-${index}` }
-      >
+      </p>
+      <p data-testid={ unitValueId }>
         {unitValue}
-
-      </span>
-      {' '}
-      <span
-        data-testid={ `customer_order_details__element-order-total-price-${index}` }
-      >
+      </p>
+      <p data-testid={ subtotalId }>
         {subtotal}
-
-      </span>
+      </p>
     </div>
   );
 }
