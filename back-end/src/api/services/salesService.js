@@ -1,5 +1,7 @@
 const { Sale } = require('../../database/models');
+const { SalesProduct } = require('../../database/models');
 /* const { User } = require('../../database/models'); */
+/* const { Product } = require('../../database/models'); */
 
 const getAllSales = async () => {
     const product = await Sale.findAll();
@@ -11,20 +13,22 @@ const createSale = async (saleData) => {
   return { sale };
 };
 
+// -----------------------------------------------------
 const getByOrderId = async (id) => {
-  const sale = await Sale.findOne({
+  const sale = await SalesProduct.findAll({
     /* include: { model: User, as: 'sellerId' }, */
-    attributes: [
+    /* attributes: [
       'id',
       'sellerId',
       'saleDate',
       'status',
       'totalPrice',
-    ],
-    where: { id },
+    ], */
+    where: { saleId: id },
   });
   return sale;
 };
+// -----------------------------------------------------
 
 const getSalesByUserId = async (id) => {
   const sales = await Sale.findAll({

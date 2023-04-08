@@ -20,12 +20,13 @@ const mocksaleproduct = [
   },
 
 ];
-
+// -----------------------------------------------------
 const getById = async (req, res) => {
   const { id } = req.params;
   const response = await getByOrderId(id);
   res.status(200).json(response);
 };
+// -----------------------------------------------------
 
 const getAllByUserId = async (req, res) => {
   const { id } = req.body;
