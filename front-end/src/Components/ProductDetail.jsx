@@ -6,29 +6,27 @@ import DetailCard from './DetailCard';
 export default function ProductDetail({
   order,
 }) {
-  const { id, sellerId, saleDate, status, totalPrice } = order;
-  const futuroArray = ['O', 'flamengo', 'não', 'é', 'time', '...'];
+  const { id, seller, saleDate, status, totalPrice } = order[0];
   return (
     <section>
       <DetailBar
         id={ id }
-        seller={ sellerId }
+        seller={ seller.name }
         date={ moment(saleDate).format('DD/MM/YYYY') }
         status={ status }
       />
-      {futuroArray.map((item) => (
+      {order.slice(1).map(({ Product: { name, price }, quantity }, index) => (
         <DetailCard
-          key={ item }
-          index={ item }
-          nome={ item }
-          quantity={ item }
-          unitValue={ item }
-          subtotal={ item }
+          key={ index }
+          index={ index + 1 }
+          nome={ name }
+          quantity={ quantity }
+          unitValue={ price }
+          subtotal={ price * quantity }
         />
       ))}
       <p data-testid="customer_order_details__element-order-total-price">
-        Total: R$
-        {totalPrice/* .replace('.', ',') */}
+        {totalPrice.replace('.', ',')}
       </p>
     </section>
   );

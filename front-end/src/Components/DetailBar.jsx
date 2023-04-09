@@ -19,7 +19,6 @@ export default function DetailBar({
         {id}
       </p>
       <p data-testid={ sellerId }>
-        P. Vend:
         {seller}
       </p>
       <p data-testid={ dateId }>
@@ -28,7 +27,7 @@ export default function DetailBar({
       <p data-testid={ statusId }>
         {status}
       </p>
-      <button type="button" data-testid={ buttonId }>
+      <button type="button" data-testid={ buttonId } disabled>
         marcar como entregue
       </button>
     </div>

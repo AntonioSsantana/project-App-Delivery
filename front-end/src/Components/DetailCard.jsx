@@ -28,7 +28,7 @@ export default function DetailCard({
         {unitValue}
       </p>
       <p data-testid={ subtotalId }>
-        {subtotal}
+        {subtotal.toFixed(2)}
       </p>
     </div>
   );

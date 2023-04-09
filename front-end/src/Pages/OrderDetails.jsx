@@ -33,6 +33,7 @@ export default function OrderDetails({ match: { params: { id } } }) {
     validateUsers();
     orderDetails();
   }, [history, id]);
+  console.log(order);
 
   return (
     <div>

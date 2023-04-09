@@ -4,27 +4,16 @@ const {
   getAllSales,
   createSale,
   getSalesByUserId,
-  getByOrderId,
+  getSaleById,
 } = require('../services/salesService');
-const { createSaleProduct } = require('../services/productSaleService');
+const { createSaleProduct, getByOrderId } = require('../services/productSaleService');
 
-/* const mocksaleproduct = [
-  {
-    saleId: 1,
-    productId: 1,
-    quantity: 1,
-  },
-  {
-    productId: 2,
-    quantity: 2,
-  },
-
-]; */
 // -----------------------------------------------------
 const getById = async (req, res) => {
   const { id } = req.params;
   const response = await getByOrderId(id);
-  res.status(200).json(response);
+  const sale = await getSaleById(id);
+  res.status(200).json([sale, ...response]);
 };
 // -----------------------------------------------------
 
@@ -45,11 +34,11 @@ const getAllsales = async (req, res) => {
     try {
       const { 
         userId, sellerId, totalPrice, deliveryAddress, 
-        deliveryNumber, status } = req.body.shift();
+        deliveryNumber, status } = req.body[0];
         const saleDate = getCurrentDateTime();
         const { sale } = await createSale({
           userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status });
-          const newArr = req.body.map(({ productId, quantity }) => ({
+          const newArr = req.body.slice(1).map(({ productId, quantity }) => ({
             saleId: sale.id, productId, quantity,
           }));
       await createSaleProduct(newArr);

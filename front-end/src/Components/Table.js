@@ -35,9 +35,10 @@ function Table() {
       deliveryNumber,
       status: 'Pendente',
     };
-    const { saleId } = await apiPOSTCheckout('sales', [finished, ...salesProduct], token);
+    const { id } = await apiPOSTCheckout('sales', [finished, ...salesProduct], token);
     localStorage.removeItem('cart');
-    history.push(`/customer/orders/${saleId}`);
+    /* console.log(id); */
+    history.push(`/customer/orders/${id}`);
   };
 
   return (
