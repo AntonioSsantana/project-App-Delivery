@@ -8,7 +8,7 @@ const {
 } = require('../services/salesService');
 const { createSaleProduct } = require('../services/productSaleService');
 
-const mocksaleproduct = [
+/* const mocksaleproduct = [
   {
     saleId: 1,
     productId: 1,
@@ -19,7 +19,7 @@ const mocksaleproduct = [
     quantity: 2,
   },
 
-];
+]; */
 // -----------------------------------------------------
 const getById = async (req, res) => {
   const { id } = req.params;
@@ -44,18 +44,15 @@ const getAllsales = async (req, res) => {
   const createSaleHandler = async (req, res) => {
     try {
       const { 
-        userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status } = req.body;
-
-      const saleDate = getCurrentDateTime();
-
-      const { sale } = await createSale({
-        userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status });
-        const newArr = mocksaleproduct.map((product) => ({
-          saleId: sale.id,
-          productId: product.productId,
-          quantity: product.quantity,
-        }));
-       await createSaleProduct(newArr);
+        userId, sellerId, totalPrice, deliveryAddress, 
+        deliveryNumber, status } = req.body.shift();
+        const saleDate = getCurrentDateTime();
+        const { sale } = await createSale({
+          userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, saleDate, status });
+          const newArr = req.body.map(({ productId, quantity }) => ({
+            saleId: sale.id, productId, quantity,
+          }));
+      await createSaleProduct(newArr);
        return res.status(201).json({ id: sale.id });
     } catch (error) {
      return res.status(400).json({ error: error.message }); 

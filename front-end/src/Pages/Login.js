@@ -29,7 +29,6 @@ export default function Login() {
       if (JSON.parse(localStorage.getItem('user')) !== null) {
         const { token } = JSON.parse(localStorage.getItem('user'));
         const response = await apiPostGeneric('validateUsers', { token });
-        console.log(response);
         if (response) {
           history.push('/customer/products');
         }

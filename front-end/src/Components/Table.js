@@ -24,7 +24,9 @@ function Table() {
 
   const finishOrder = async () => {
     const token = JSON.parse(localStorage.getItem('user')).token || [];
-    console.log(token);
+    const salesProduct = cart.map(({ id, quantity }) => (
+      { productId: id, quantity }
+    ));
     const finished = {
       userId: 3,
       sellerId: 2,
@@ -33,8 +35,9 @@ function Table() {
       deliveryNumber,
       status: 'Pendente',
     };
-    const { id } = await apiPOSTCheckout('sales', finished, token);
-    history.push(`/customer/orders/${id}`);
+    const { saleId } = await apiPOSTCheckout('sales', [finished, ...salesProduct], token);
+    localStorage.removeItem('cart');
+    history.push(`/customer/orders/${saleId}`);
   };
 
   return (

@@ -1,20 +1,7 @@
-// const APIURL = 'http://localhost:3001/user';
-
-// const apiCall = async () => {
-//   try {
-//     const fetchAPI = await fetch(`${APIURL}`);
-//     const result = await fetchAPI.json();
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// export default apiCall;
 const APIURL = 'http://localhost:3001/login';
 
 const apiCallLogin = async (userData) => {
   try {
-    console.log('userdata:', userData);
     const fetchAPI = await fetch(APIURL, {
       method: 'POST',
       headers: {

@@ -36,7 +36,6 @@ export default function Admin() {
       if (JSON.parse(localStorage.getItem('user')) !== null) {
         const { token, name } = JSON.parse(localStorage.getItem('user'));
         const response = await apiPostGeneric('validateUsers', { token });
-        console.log('entrou no useEffect');
         setisLogged(false);
         setuserName(name);
         if (!response) {
