@@ -9,7 +9,7 @@ function Table() {
 
   const { cart, setCart, totalPrice } = useContext(MyContext);
   const [deliveryAddress, setDeliveryAdress] = useState('');
-  const [deliveryNumber, setDeliveryNumber] = useState(0);
+  const [deliveryNumber, setDeliveryNumber] = useState(null);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart')) || [];
@@ -122,7 +122,7 @@ function Table() {
         />
         <span>Número</span>
         <input
-          type="text"
+          type="number"
           id="number"
           data-testid="customer_checkout__input-address-number"
           value={ deliveryNumber }
