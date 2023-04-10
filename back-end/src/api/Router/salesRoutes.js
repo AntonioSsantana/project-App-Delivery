@@ -1,12 +1,14 @@
 const express = require('express');
 const { getAllsales,
     createSaleHandler,
-    getAllById,
+    getAllByUserId,
+    getById,
  } = require('../controllers/salesController');
 
 const salesRouter = express.Router();
 
-salesRouter.post('/customer/orders', getAllById);
+salesRouter.get('/customer/orders/:id', getById);
+salesRouter.post('/customer/orders', getAllByUserId);
 salesRouter.get('/sales', getAllsales);
 salesRouter.post('/sales', createSaleHandler);
 

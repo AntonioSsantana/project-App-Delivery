@@ -2,7 +2,6 @@ const APIURL = 'http://localhost:3001/users';
 
 const apiCall = async (userData) => {
   try {
-    console.log('userdata:', userData);
     const fetchAPI = await fetch(APIURL, {
       method: 'POST',
       headers: {

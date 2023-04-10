@@ -1,7 +1,6 @@
 const APIURL = 'http://localhost:3001/';
 const apiPOSTCheckout = async (ENDPOINT, userData, token) => {
   try {
-    console.log('userData:', userData);
     const fetchAPI = await fetch(`${APIURL}${ENDPOINT}`, {
       method: 'POST',
       headers: {

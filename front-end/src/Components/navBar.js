@@ -5,7 +5,6 @@ export default function NavBar({ nome }) {
   const history = useHistory();
 
   const redirect = (event) => {
-    console.log(event.target.name);
     switch (event.target.name) {
     case 'products':
       history.push('/customer/products');

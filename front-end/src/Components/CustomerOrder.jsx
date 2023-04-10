@@ -8,14 +8,14 @@ export default function CustomerOrder({
   subtotal,
 }) {
   const history = useHistory();
-  const orderId = `customer_orders__element-order-id-${id}`;
-  const statusId = `customer_orders__element-delivery-status-${id}`;
-  const dateId = `customer_orders__element-order-date-${id}`;
-  const subtotalId = `customer_orders__element-card-price-${id}`;
+  const customer = 'customer_orders__element-';
+  const orderId = `${customer}order-id-${id}`;
+  const statusId = `${customer}delivery-status-${id}`;
+  const dateId = `${customer}order-date-${id}`;
+  const subtotalId = `${customer}card-price-${id}`;
   return (
     <button
       type="button"
-      data-testid={ orderId }
       onClick={ () => history.push(`/customer/orders/${id}`) }
     >
       <label htmlFor="order">

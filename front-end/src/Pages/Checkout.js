@@ -8,7 +8,7 @@ function Checkout() {
 
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cart')));
-  }, []);
+  }, [setCart]);
 
   useEffect(() => {
     const sumPrice = cart.reduce((acc, item) => {
@@ -18,7 +18,7 @@ function Checkout() {
       return acc;
     }, 0);
     setTotalPrice(sumPrice.toFixed(2).replace('.', ','));
-  }, [cart]);
+  }, [cart, setTotalPrice]);
 
   return (
     <>

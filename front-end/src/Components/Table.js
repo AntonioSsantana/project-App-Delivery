@@ -9,13 +9,13 @@ function Table() {
 
   const { cart, setCart, totalPrice } = useContext(MyContext);
   const [deliveryAddress, setDeliveryAdress] = useState('');
-  const [deliveryNumber, setDeliveryNumber] = useState(0);
+  const [deliveryNumber, setDeliveryNumber] = useState(null);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart')) || [];
 
     setCart(items);
-  }, []);
+  }, [setCart]);
 
   const removeItem = (id) => {
     const item = cart.filter((i) => +i.id !== +id);
@@ -24,7 +24,9 @@ function Table() {
 
   const finishOrder = async () => {
     const token = JSON.parse(localStorage.getItem('user')).token || [];
-    console.log(token);
+    const salesProduct = cart.map(({ id, quantity }) => (
+      { productId: id, quantity }
+    ));
     const finished = {
       userId: 3,
       sellerId: 2,
@@ -33,7 +35,9 @@ function Table() {
       deliveryNumber,
       status: 'Pendente',
     };
-    const { id } = await apiPOSTCheckout('sales', finished, token);
+    const { id } = await apiPOSTCheckout('sales', [finished, ...salesProduct], token);
+    localStorage.removeItem('cart');
+    /* console.log(id); */
     history.push(`/customer/orders/${id}`);
   };
 
@@ -118,7 +122,7 @@ function Table() {
         />
         <span>Número</span>
         <input
-          type="text"
+          type="number"
           id="number"
           data-testid="customer_checkout__input-address-number"
           value={ deliveryNumber }
