@@ -8,15 +8,12 @@ const {
 } = require('../services/salesService');
 const { createSaleProduct, getByOrderId } = require('../services/productSaleService');
 
-// -----------------------------------------------------
 const getById = async (req, res) => {
   const { id } = req.params;
   const response = await getByOrderId(id);
   const sale = await getSaleById(id);
   res.status(200).json([sale, ...response]);
 };
-// -----------------------------------------------------
-
 const getAllByUserId = async (req, res) => {
   const { id } = req.body;
   const response = await getSalesByUserId(id);
