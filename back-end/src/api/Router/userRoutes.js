@@ -10,9 +10,9 @@ const {
 const userRouter = express.Router();
 
 userRouter.post('/users', getExistingUserHandler)
+.post('/login', validateLoginHandler)
 .post('/register', createUserHandler)
 .get('/users/:id', getUserByIdHandler)
-.post('/validateUsers', validateUsers)
-.post('/login', validateLoginHandler);
+.post('/validateUsers', validateUsers);
 
 module.exports = userRouter;

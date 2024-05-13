@@ -10,17 +10,15 @@ export default function Register() {
   const [failedRegister, setfailedRegister] = useState(false);
 
   useEffect(() => {
-    const verifyEmail = '@';
-    const verifyEmailDot = '.com';
-    const minPassword = 6;
-    const doze = 12;
-    const validEmail = email.includes(verifyEmail) && email.includes(verifyEmailDot);
-    const validPassword = password.length >= minPassword;
-    const finalValidation = validEmail && validPassword;
-    if (password.length < minPassword || name.length < doze || !finalValidation) {
+    const regex = /^\S+@\S+\.\S+$/;
+    const min = 6;
+    const twelve = 12;
+
+    if (password.length < min || !regex.test(email)) {
       setButton(true);
     }
-    if (finalValidation && name.length >= doze) {
+
+    if (name.length >= twelve) {
       setButton(false);
     }
   }, [email, password, name]);
@@ -57,7 +55,6 @@ export default function Register() {
             type="text"
             id="name-input"
             data-testid="common_register__input-name"
-            value={ name }
             onChange={ (e) => setname(e.target.value) }
           />
         </label>
@@ -67,7 +64,6 @@ export default function Register() {
             type="email"
             id="email-input"
             data-testid="common_register__input-email"
-            value={ email }
             onChange={ (e) => setemail(e.target.value) }
           />
         </label>
@@ -77,7 +73,6 @@ export default function Register() {
             id="pssword-input"
             type="password"
             data-testid="common_register__input-password"
-            value={ password }
             onChange={ (e) => setpassword(e.target.value) }
           />
         </label>
