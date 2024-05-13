@@ -50,3 +50,13 @@ npm run dev
 | **POST: /register** | Register a user |
 | **GET: /users:id** | Get user by id |
 | **POST: /validateUsers** | Route to validate users |
+
+## Contribuidores
+
+Este projeto foi desenvolvido por uma equipe de 5 pessoas:
+
+- [Antonio Santana](https://github.com/antonioclp)
+- [Francesco Oviedo](https://github.com/francescooviedo)
+- [Juan Pablo](https://github.com/TheKibe)
+- [Pedro Jorge](https://github.com/PedroJoMa)
+- [Jonathan Verdeli](https://github.com/verdeli)
