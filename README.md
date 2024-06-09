@@ -51,7 +51,7 @@ npm run dev
 | **GET: /users:id** | Get user by id |
 | **POST: /validateUsers** | Route to validate users |
 
-## Contribuidores
+## Contributors
 
 Este projeto foi desenvolvido por uma equipe de 5 pessoas:
 
